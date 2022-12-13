@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+            font-family: sans-serif;
+        }
+        body{
+            background-color: rgb(255, 234, 0);
+        }
+        .welcome-screen{
+            width: 100%;
+            height: 100%;
+        }
+        .welcome-screen img{
+            width: 50%;
+            height: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+        .welcome-screen button{
+            background-color: #2a2a2a;
+            color: white;
+            border-radius: 10px;
+            border:none;
+            text-align: center;
+            padding: 10px;
+            font-size: 20px;
+            font-weight: 600;
+            position: absolute;
+            top: 80%;
+            left: 50%;
+            transform: translate(-50%,-80%);
+            cursor: pointer;
+        }
+        .game-screen{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            display: none;
+        }
+        .game-screen .icons{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+        }
+        .game-screen h1{
+            margin:10px;
+            color: #2a2a2a;
+            text-align: center;
+        }
+        .game-screen img{
+            width: 200px;
+            cursor: pointer;
+        }
+        .game-screen .icon{
+            border: none;
+            border-radius: 50%;
+            padding: 5px;
+            margin: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .game-screen .btn{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .game-screen .btn button{
+            background-color: #2a2a2a;
+            color: white;
+            border-radius: 10px;
+            border:none;
+            text-align: center;
+            padding: 10px;
+            font-size: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .end-screen{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            display: none;
+        }
+        .end-screen .icons{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            text-align: center;
+        }
+        .end-screen .icon{
+            margin: 30px;
+        }
+        .end-screen img{
+            width: 150px;
+        }
+        .end-screen .result-inter{
+            padding: 10px;
+            color: white;
+            background-color: green;
+            font-size: 22px;
+            font-weight: 600;
+            text-align: center;
+        }
+        .end-screen .score{
+            background-color: rgb(255, 234, 0);
+            color: #2a2a2a;
+            font-size: 24px;
+            font-weight: 600;
+            text-align: center;
+            padding: 10px;
+        }
+        .end-screen .btn{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .end-screen .btn button{
+            background-color: #2a2a2a;
+            color: white;
+            border-radius: 10px;
+            border:none;
+            text-align: center;
+            padding: 10px;
+            font-size: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .result-screen{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            color: #2a2a2a;
+            font-size: 24px;
+            font-weight: 600;
+            text-align: center;
+            padding: 10px;
+            display: none;
+        } 
+        .result-screen .btn{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .result-screen .btn button{
+            background-color: #2a2a2a;
+            color: white;
+            border-radius: 10px;
+            border:none;
+            text-align: center;
+            padding: 10px;
+            font-size: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 10px;
+        }
+    </style>
+    <title>Rock Paper & Scissor</title>
+</head>
+<body>
+    <div class="welcome-screen" id="welcome-screen">
+        <img src="img/bg.png" alt="">
+        <button id="start-btn" onclick="return start()">Start the Game</button>
+    </div>
+    <div class="game-screen" id="game-screen">
+        <h1>Choose Between Rock, Paper or Scissor</h1>
+        <div class="icons">
+            <div class="icon" id="scissor"><img src="img/scissor.png" class="img" id="scissor" onclick="return selecticon(scissor)"></div>
+            <div class="icon" id="rock"><img src="img/rock.png" class="img" id="rock" onclick="return selecticon(rock)"></div>
+            <div class="icon" id="paper"><img src="img/paper.png" class="img" id="paper" onclick="return selecticon(paper)"></div>
+        </div>
+        <div class="btn">
+            <button id="select-btn" onclick="return selectbtn(icon)">Select ></button>
+        </div>
+    </div>
+    <div class="end-screen" id="end-screen">
+        <div class="icons">
+            <div class="icon"><img src="" class="img" id="user"><h2>Your Guess</h2></div>
+            <div class="icon"><img src="" class="img" id="computer"><h2>Computer Guess</h2></div>
+        </div>
+        <div class="result-inter" id="result-inter"></div>
+        <div class="score" id="score"></div>
+        <div class="btn"><button onclick="return start()">Next ></button></div>
+    </div>
+    <div class="result-screen" id="result-screen">
+        <div class="total-score" id="total-score"></div>
+        <div class="result" id="result"></div>
+        <div class="btn"><button onclick="return newgame()">Play New Game</button></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
